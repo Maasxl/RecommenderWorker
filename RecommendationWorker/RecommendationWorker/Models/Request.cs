@@ -18,5 +18,7 @@ namespace RecommendationWorker.Models
         public string PageType { get; set; }
         [BsonElement("timestamp")]
         public long Timestamp { get; set; }
+        [BsonElement("destinationId")]
+        public string DestinationId { get; set; }
     }
 }
