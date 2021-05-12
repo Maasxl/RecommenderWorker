@@ -9,7 +9,7 @@ namespace RecommendationWorker.Repositories.Interfaces
     public interface IUserDataRepository
     {
         List<DataLayer> Get();
-        DataLayer GetById(string id);
+        List<DataLayer> GetByUserId(string id);
         DataLayer InsertData(DataLayer data);
     }
 }

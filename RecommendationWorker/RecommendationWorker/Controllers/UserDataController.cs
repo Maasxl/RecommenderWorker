@@ -28,11 +28,11 @@ namespace RecommendationWorker.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<DataLayer> Get(string id)
+        public ActionResult<List<DataLayer>> GetByUserId(string id)
         {
             if (id != null || id != "")
             {
-                return _userDataService.GetDataLayerById(id);
+                return _userDataService.GetDataLayerByUserId(id);
             }
             return NotFound();
         }

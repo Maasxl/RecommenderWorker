@@ -26,8 +26,8 @@ namespace RecommendationWorker.Repositories
             return _dataLayer.Find(_ => true).ToList();
         }
 
-        public DataLayer GetById(string id) =>
-            _dataLayer.Find(data => data.Cookies.GA.Equals(id)).FirstOrDefault();
+        public List<DataLayer> GetByUserId(string id) =>
+            _dataLayer.Find(data => data.Cookies.GA.Equals(id) || data.Cookies.GID.Equals(id)).ToList();
 
         public DataLayer InsertData(DataLayer data)
         {

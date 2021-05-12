@@ -9,7 +9,7 @@ namespace RecommendationWorker.Serivces.Interfaces
     public interface IUserDataService
     {
         List<DataLayer> GetDataLayer();
-        DataLayer GetDataLayerById(string id);
+        List<DataLayer> GetDataLayerByUserId(string id);
         DataLayer InsertDataLayer(DataLayer data);
     }
 }
