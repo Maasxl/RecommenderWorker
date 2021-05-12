@@ -11,9 +11,9 @@ namespace RecommendationWorker.Models
         [BsonElement("accomodations")]
         public List<Accomodation> Accomodations { get; set; }
         [BsonElement("arrivalDate")]
-        public DateTime ArrivalDate { get; set; }
+        public string ArrivalDate { get; set; }
         [BsonElement("datetime")]
-        public DateTime DateTime { get; set; }
+        public string DateTime { get; set; }
         [BsonElement("duration")]
         public int Duration { get; set; }
         [BsonElement("flexibleDays")]

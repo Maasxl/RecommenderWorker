@@ -15,12 +15,18 @@ namespace RecommendationWorker.Models
         [BsonElement("search")]
         public Search Search { get; set; }
         [BsonElement("searchResultDetail")]
-        public SearchResult SearchResultDetail { get; set; }
+        public SearchResultDetail SearchResultDetail { get; set; }
+    }
+
+    public class SearchResultDetail
+    {
+        [BsonElement("searchResult")]
+        public SearchResult SearchResult { get; set; }
     }
 
     public class SearchResult
     {
         [BsonElement("campsites")]
-        public List<double> Campsites { get; set; }
+        public string[] Campsites { get; set; }
     }
 }
