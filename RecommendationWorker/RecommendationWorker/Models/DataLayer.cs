@@ -12,10 +12,15 @@ namespace RecommendationWorker.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public int Timestamp { get; set; }
+        [BsonElement("timestamp")]
+        public long Timestamp { get; set; }
+        [BsonElement("applicationData")]
         public ApplicationData ApplicationData { get; set; }
-        public string Entity_Kind { get; set; }
+        [BsonElement("entityKind")]
+        public string EntityKind { get; set; }
+        [BsonElement("ip")]
         public string Ip { get; set; }
+        [BsonElement("cookies")]
         public Cookies Cookies { get; set; }
     }
 }

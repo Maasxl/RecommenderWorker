@@ -1,5 +1,7 @@
 ﻿using MongoDB.Driver;
 using RecommendationWorker.Models;
+using RecommendationWorker.Repositories;
+using RecommendationWorker.Repositories.Interfaces;
 using RecommendationWorker.Serivces.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,23 +12,31 @@ namespace RecommendationWorker.Serivces
 {
     public class UserDataService : IUserDataService
     {
-        private readonly IMongoCollection<DataLayer> _dataLayer;
+        private readonly IUserDataRepository _userDataRepository;
 
-        public UserDataService(IMongoDatabaseSettings settings)
+        public UserDataService(IUserDataRepository userDataRepository)
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
-
-            _dataLayer = database.GetCollection<DataLayer>(settings.UserClicksCollection);
+            _userDataRepository = userDataRepository;
         }
 
-        public List<DataLayer> Get() =>
-            _dataLayer.Find(data => true).ToList();
+        public List<DataLayer> GetDataLayer() =>
+            _userDataRepository.Get();
 
-        public DataLayer InsertData(DataLayer data)
+        public DataLayer GetDataLayerById(string id)
         {
-            _dataLayer.InsertOne(data);
-            return data;
+            return _userDataRepository.GetById(id);
         }
+
+        public DataLayer InsertDataLayer(DataLayer data)
+        {
+            DataLayer returnData = new DataLayer();
+            if (data != null)
+            {
+                returnData = _userDataRepository.InsertData(data);
+            }
+
+            return returnData;
+        }
+           
     }
 }

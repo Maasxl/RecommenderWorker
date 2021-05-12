@@ -8,6 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RecommendationWorker.Models;
+using RecommendationWorker.Repositories;
+using RecommendationWorker.Repositories.Interfaces;
+using RecommendationWorker.Serivces;
 using RecommendationWorker.Serivces.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -34,7 +37,8 @@ namespace RecommendationWorker
             services.AddSingleton<IMongoDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<MongoDatabaseSettings>>().Value);
 
-            services.AddTransient<IUserDataService, IUserDataService>();
+            services.AddScoped<IUserDataService, UserDataService>();
+            services.AddScoped<IUserDataRepository, UserDataRepository>();
 
             services.AddControllers();
         }
@@ -46,8 +50,6 @@ namespace RecommendationWorker
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 

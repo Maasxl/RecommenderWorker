@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace RecommendationWorker.Serivces.Interfaces
 {
-    interface IUserDataService
+    public interface IUserDataService
     {
-        List<DataLayer> Get();
-        DataLayer InsertData(DataLayer data);
+        List<DataLayer> GetDataLayer();
+        DataLayer GetDataLayerById(string id);
+        DataLayer InsertDataLayer(DataLayer data);
     }
 }
