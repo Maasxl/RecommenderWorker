@@ -10,7 +10,5 @@ namespace RecommendationWorker.Models
     {
         [BsonElement("cookiesAccepted")]
         public bool CookiesAccepted { get; set; }
-        [BsonElement("personalizedContent")]
-        public object PersonalizedContent { get; set; }
     }
 }

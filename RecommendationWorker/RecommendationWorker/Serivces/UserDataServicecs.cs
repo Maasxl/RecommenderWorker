@@ -19,8 +19,10 @@ namespace RecommendationWorker.Serivces
             _userDataRepository = userDataRepository;
         }
 
-        public List<DataLayer> GetDataLayer() =>
-            _userDataRepository.Get();
+        public List<DataLayer> GetDataLayer()
+        {
+            return _userDataRepository.Get();
+        }
 
         public DataLayer GetDataLayerById(string id)
         {

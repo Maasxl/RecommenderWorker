@@ -9,7 +9,7 @@ namespace RecommendationWorker.Models
     public class BigDataObject
     {
         [BsonElement("requestDetail")]
-        public RequestDetail Request { get; set; }
+        public RequestDetail RequestDetail { get; set; }
         [BsonElement("clangHash")]
         public string ClangHash { get; set; }
         [BsonElement("search")]

@@ -10,9 +10,5 @@ namespace RecommendationWorker.Models
     {
         [BsonElement("bigDataObject")]
         public BigDataObject BigDataObject { get; set; }
-        [BsonElement("data")]
-        public List<object> Data { get; set; }
-        [BsonElement("bookingData")]
-        public object BookingData { get; set; }
     }
 }

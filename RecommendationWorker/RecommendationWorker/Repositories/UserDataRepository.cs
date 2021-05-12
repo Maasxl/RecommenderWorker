@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using RecommendationWorker.Models;
 using RecommendationWorker.Repositories.Interfaces;
 using System;
@@ -20,8 +21,10 @@ namespace RecommendationWorker.Repositories
             _dataLayer = database.GetCollection<DataLayer>(settings.UserClicksCollection);
         }
 
-        public List<DataLayer> Get() =>
-            _dataLayer.Find(data => true).ToList();
+        public List<DataLayer> Get()
+        {
+            return _dataLayer.Find(_ => true).ToList();
+        }
 
         public DataLayer GetById(string id) =>
             _dataLayer.Find(data => data.Cookies.GA.Equals(id)).FirstOrDefault();
