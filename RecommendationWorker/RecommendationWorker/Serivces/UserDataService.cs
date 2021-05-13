@@ -41,6 +41,9 @@ namespace RecommendationWorker.Serivces
 
                 // Filters the dataLayer to get campsiteIds and adds ratings based on entityKind
                 FilterDataLayer(data);
+
+                // TODO: Train model with new data
+
             }
 
             return returnData;
