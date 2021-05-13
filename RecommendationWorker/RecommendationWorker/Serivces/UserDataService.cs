@@ -40,20 +40,30 @@ namespace RecommendationWorker.Serivces
                 returnData = _userDataRepository.InsertData(data);
 
                 // Filters the dataLayer to get campsiteIds and adds ratings based on entityKind
-                int amount = _userRatingRepository.InsertUserRatings(FilterDataLayer(data));
+                FilterDataLayer(data);
             }
 
             return returnData;
         }
 
-        private List<UserRating> FilterDataLayer(DataLayer data)
+        public void FilterDataLayer(DataLayer data)
         {
             List<UserRating> userRatings = new List<UserRating>();
+            List<UserRating> existingRatings = _userRatingRepository.GetUserRatingsById(data.Cookies.GA);
+            List<UserRating> updateRatings = new List<UserRating>();
             switch (data.EntityKind)
             {
                 // Campsite detail page
                 case "eurocampings_campsite":
-                    userRatings.Add(new UserRating { CampsiteId = data.ApplicationData.BigDataObject.RequestDetail.Campsite.CampsiteID, UserId = data.Cookies.GA, Rating = 5.0 });
+                    updateRatings = existingRatings.Where(rating => rating.CampsiteId.Equals(data.ApplicationData.BigDataObject.RequestDetail.Campsite.CampsiteID)).ToList();
+                    foreach(UserRating rating in updateRatings)
+                    {
+                        rating.Rating = (rating.Rating + 5.0) / 2;
+                    }
+                    if (updateRatings.Count < 1)
+                    {
+                        userRatings.Add(new UserRating { CampsiteId = data.ApplicationData.BigDataObject.RequestDetail.Campsite.CampsiteID, UserId = data.Cookies.GA, Rating = 5.0 });
+                    }
                     break;
 
                 // Search result page
@@ -62,7 +72,16 @@ namespace RecommendationWorker.Serivces
                     {
                         if (int.TryParse(campsite, out int id))
                         {
-                            userRatings.Add(new UserRating { CampsiteId = id, UserId = data.Cookies.GA, Rating = 3.0 });
+                            updateRatings = existingRatings.Where(rating => rating.CampsiteId.Equals(id)).ToList();
+                            foreach (UserRating rating in updateRatings)
+                            {
+                                rating.Rating = (rating.Rating + 3.0) / 2.0;
+                            }
+
+                            if (updateRatings.Any(rating => rating.CampsiteId.Equals(campsite)))
+                            {
+                                userRatings.Add(new UserRating { CampsiteId = id, UserId = data.Cookies.GA, Rating = 3.0 });
+                            }
                         }
                     }
                     break;
@@ -71,8 +90,15 @@ namespace RecommendationWorker.Serivces
                 default:
                     break;
             }
-            return userRatings;
+
+            if (updateRatings.Count > 0)
+            {
+                _userRatingRepository.UpdateUserRatings(updateRatings);
+            }
+            else
+            {
+                _userRatingRepository.InsertUserRatings(userRatings);
+            }
         }
-           
     }
 }
