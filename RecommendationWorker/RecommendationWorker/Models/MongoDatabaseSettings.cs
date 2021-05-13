@@ -8,6 +8,7 @@ namespace RecommendationWorker.Models
     public class MongoDatabaseSettings : IMongoDatabaseSettings
     {
         public string UserClicksCollection { get; set; }
+        public string UserRatingsCollection { get; set; }
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
     }
@@ -15,6 +16,7 @@ namespace RecommendationWorker.Models
     public interface IMongoDatabaseSettings
     {
         string UserClicksCollection { get; set; }
+        string UserRatingsCollection { get; set; }
         string ConnectionString { get; set; }
         string DatabaseName { get; set; }
     }

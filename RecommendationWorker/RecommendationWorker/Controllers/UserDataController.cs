@@ -38,9 +38,9 @@ namespace RecommendationWorker.Controllers
         }
 
         [HttpPost]
-        public void Create([FromBody]DataLayer dataLayer)
+        public ActionResult<string> Create([FromBody]DataLayer dataLayer)
         {
-            _userDataService.InsertDataLayer(dataLayer);
+            return _userDataService.InsertDataLayer(dataLayer).Id;
         }
     }
 }
