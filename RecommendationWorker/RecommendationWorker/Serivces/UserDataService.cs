@@ -95,10 +95,7 @@ namespace RecommendationWorker.Serivces
             {
                 _userRatingRepository.UpdateUserRatings(updateRatings);
             }
-            else
-            {
-                _userRatingRepository.InsertUserRatings(userRatings);
-            }
+            _userRatingRepository.InsertUserRatings(userRatings);
         }
     }
 }
