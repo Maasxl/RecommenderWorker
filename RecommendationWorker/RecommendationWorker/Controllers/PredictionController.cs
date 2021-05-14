@@ -21,12 +21,6 @@ namespace RecommendationWorker.Controllers
             _recommendationModelSerivce = recommendationModelService;
         }
 
-        [HttpGet]
-        public ActionResult<string> Get()
-        {
-            return "test";
-        }
-
         [HttpPost]
         public ActionResult<List<CampsiteRatingPrediction>> GetPredictionforCampsites([FromBody]PredictionRequest predictionRequest)
         {
