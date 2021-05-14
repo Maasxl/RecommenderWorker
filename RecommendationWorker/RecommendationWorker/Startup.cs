@@ -41,6 +41,7 @@ namespace RecommendationWorker
             services.AddScoped<IUserDataRepository, UserDataRepository>();
             services.AddScoped<IUserRatingRepository, UserRatingRepository>();
             services.AddScoped<IUserRatingService, UserRatingService>();
+            services.AddScoped<ICampsiteRatingRepository, CampsiteRatingRepository>();
 
             services.AddControllers();
         }

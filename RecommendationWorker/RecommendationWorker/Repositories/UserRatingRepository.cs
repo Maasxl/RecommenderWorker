@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using RecommendationWorker.Models;
+using RecommendationWorker.Models.MLModels;
 using RecommendationWorker.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
