@@ -85,7 +85,7 @@ namespace RecommendationWorker.Serivces
                                 rating.Rating = (rating.Rating + 3.0) / 2.0;
                             }
 
-                            if (!updateRatings.Any(rating => rating.CampsiteId.Equals(campsite)))
+                            if (updateRatings.Any(rating => rating.CampsiteId.Equals(id)) == false)
                             {
                                 userRatings.Add(new UserRating { CampsiteId = id, UserId = data.Cookies.GA, Rating = 3.0 });
                             }
