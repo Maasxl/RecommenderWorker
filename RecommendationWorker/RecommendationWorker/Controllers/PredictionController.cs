@@ -24,7 +24,14 @@ namespace RecommendationWorker.Controllers
         [HttpPost]
         public ActionResult<List<CampsiteRatingPrediction>> GetPredictionforCampsites([FromBody]PredictionRequest predictionRequest)
         {
-            return _recommendationModelSerivce.GetPrediciton(predictionRequest.userId, predictionRequest.campsites);
+            try
+            {
+                return Ok(_recommendationModelSerivce.GetPrediciton(predictionRequest.userId, predictionRequest.campsites));
+            } 
+            catch (Exception e)
+            {
+                return StatusCode(500, e);
+            }
         }
     }
 }

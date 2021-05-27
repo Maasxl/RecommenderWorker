@@ -38,17 +38,32 @@ namespace RecommendationWorker.Controllers
         [HttpGet("{id}")]
         public ActionResult<List<DataLayer>> GetByUserId(string id)
         {
-            if (id != null || id != "")
+            try
             {
-                return _userDataService.GetDataLayerByUserId(id);
+                if (id != null || id != "")
+                {
+                    return Ok(_userDataService.GetDataLayerByUserId(id));
+                }
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpPost]
         public ActionResult<string> Create([FromBody]DataLayer dataLayer)
         {
-            return _userDataService.InsertDataLayer(dataLayer).Id;
+            try
+            {
+                string id = _userDataService.InsertDataLayer(dataLayer).Id;
+                return Ok(id);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e);
+            }
         }
     }
 }

@@ -34,8 +34,18 @@ namespace RecommendationWorker.Repositories
             }
         }
 
-        public List<DataLayer> GetByUserId(string id) =>
-            _dataLayer.Find(data => data.Cookies.GA.Equals(id) || data.Cookies.GID.Equals(id)).ToList();
+        public List<DataLayer> GetByUserId(string id)
+        {
+            List<DataLayer> UserData = _dataLayer.Find(data => data.Cookies.GA.Equals(id) || data.Cookies.GID.Equals(id)).ToList();
+            if (UserData.Count > 0)
+            {
+                return UserData;
+            } 
+            else
+            {
+                throw new Exception("No results found");
+            }
+        }
 
         public DataLayer InsertData(DataLayer data)
         {

@@ -35,20 +35,20 @@ namespace RecommendationWorker.Serivces
 
         public DataLayer InsertDataLayer(DataLayer data)
         {
-            DataLayer returnData = new DataLayer();
             if (data != null)
             {
                 // Inserts the dataLayer into MongoDB
-                returnData = _userDataRepository.InsertData(data);
+                DataLayer returnData = _userDataRepository.InsertData(data);
 
                 // Filters the dataLayer to get campsiteIds and adds ratings based on entityKind
                 FilterDataLayer(data);
 
                 // Train model with new data
                 _recommendationModelSerivce.TrainModel();
+                return returnData;
             }
 
-            return returnData;
+            throw new Exception("No data to be saved");
         }
 
         public void FilterDataLayer(DataLayer data)
