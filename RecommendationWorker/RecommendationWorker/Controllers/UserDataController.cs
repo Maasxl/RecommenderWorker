@@ -24,7 +24,15 @@ namespace RecommendationWorker.Controllers
         [HttpGet]
         public ActionResult<List<DataLayer>> Get()
         {
-            return _userDataService.GetDataLayer();
+            try
+            {
+                List<DataLayer> datalayer = _userDataService.GetDataLayer();
+                return Ok(datalayer);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e); 
+            }
         }
 
         [HttpGet("{id}")]

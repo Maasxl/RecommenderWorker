@@ -23,7 +23,15 @@ namespace RecommendationWorker.Repositories
 
         public List<DataLayer> Get()
         {
-            return _dataLayer.Find(_ => true).ToList();
+            List<DataLayer> UserData = _dataLayer.Find(_ => true).ToList();
+            if (UserData.Count > 0)
+            {
+                return UserData;
+            } 
+            else
+            {
+                throw new Exception("Cannot get any results");
+            }
         }
 
         public List<DataLayer> GetByUserId(string id) =>
