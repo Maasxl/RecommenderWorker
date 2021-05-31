@@ -38,14 +38,11 @@ namespace RecommendationWorker.Repositories
 
         public void UpdateUserRatings(List<UserRating> userRatings)
         {
-            if (userRatings.Count > 0)
+            foreach(UserRating rating in userRatings)
             {
-                foreach(UserRating rating in userRatings)
-                {
-                    var filter = Builders<UserRating>.Filter.Eq("UserId", rating.UserId) & Builders<UserRating>.Filter.Eq("CampsiteId", rating.CampsiteId);
-                    var update = Builders<UserRating>.Update.Set("Rating", rating.Rating);
-                    _userRating.UpdateOne(filter, update);
-                }
+                var filter = Builders<UserRating>.Filter.Eq("UserId", rating.UserId) & Builders<UserRating>.Filter.Eq("CampsiteId", rating.CampsiteId);
+                var update = Builders<UserRating>.Update.Set("Rating", rating.Rating);
+                _userRating.UpdateOne(filter, update);
             }
         }
     }

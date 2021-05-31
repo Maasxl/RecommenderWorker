@@ -23,7 +23,12 @@ namespace RecommendationWorker.Repositories
 
         public IEnumerable<CampsiteRatingData> GetAllCampsiteRatingData()
         {
-            return _campsiteRatingData.Find(data => true).ToList();
+            IEnumerable<CampsiteRatingData> campsiteRatingDatas = _campsiteRatingData.Find(data => true).ToList();
+            if (campsiteRatingDatas.Any())
+            {
+                return campsiteRatingDatas;
+            }
+            throw new Exception("No Rating data found!");
         }
     }
 }

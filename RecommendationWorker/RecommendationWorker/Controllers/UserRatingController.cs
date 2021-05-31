@@ -24,7 +24,14 @@ namespace RecommendationWorker.Controllers
         {
             if (id != null || id != "")
             {
-                return _userRatingService.GetUserRatingById(id);
+                try
+                {
+                    return Ok(_userRatingService.GetUserRatingById(id));
+                }
+                catch (Exception e)
+                {
+                    return StatusCode(500, e);
+                }
             }
             return NotFound();
         }
