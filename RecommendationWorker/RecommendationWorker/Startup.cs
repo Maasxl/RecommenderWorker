@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RecommendationWorker.Models;
+using RecommendationWorker.MongoDB;
 using RecommendationWorker.Repositories;
 using RecommendationWorker.Repositories.Interfaces;
 using RecommendationWorker.Serivces;
@@ -43,6 +44,7 @@ namespace RecommendationWorker
             services.AddScoped<IUserRatingService, UserRatingService>();
             services.AddScoped<ICampsiteRatingRepository, CampsiteRatingRepository>();
             services.AddScoped<IRecommendationModelSerivce, RecommendationModelService>();
+            services.AddScoped<IMongoDBContext, MongoDBContext>();
 
             services.AddControllers();
         }

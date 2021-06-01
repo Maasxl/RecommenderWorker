@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecommendationWorker", "RecommendationWorker\RecommendationWorker.csproj", "{B70D98E6-BA9D-4A46-A08C-714CE636A527}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecommendationWorker", "RecommendationWorker\RecommendationWorker.csproj", "{B70D98E6-BA9D-4A46-A08C-714CE636A527}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecommendationWorker.Tests", "RecommendationWorker.Tests\RecommendationWorker.Tests.csproj", "{764BCD1F-BB30-49FC-B5AC-7D168E0C865D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B70D98E6-BA9D-4A46-A08C-714CE636A527}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B70D98E6-BA9D-4A46-A08C-714CE636A527}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B70D98E6-BA9D-4A46-A08C-714CE636A527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{764BCD1F-BB30-49FC-B5AC-7D168E0C865D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{764BCD1F-BB30-49FC-B5AC-7D168E0C865D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{764BCD1F-BB30-49FC-B5AC-7D168E0C865D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{764BCD1F-BB30-49FC-B5AC-7D168E0C865D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

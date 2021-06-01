@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using RecommendationWorker.Models;
+using RecommendationWorker.MongoDB;
 using RecommendationWorker.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,9 @@ namespace RecommendationWorker.Repositories
     {
         private readonly IMongoCollection<DataLayer> _dataLayer;
 
-        public UserDataRepository(IMongoDatabaseSettings settings)
+        public UserDataRepository(IMongoDBContext context)
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
-
-            _dataLayer = database.GetCollection<DataLayer>(settings.UserClicksCollection);
+            _dataLayer = context.GetDatalayerCollection();
         }
 
         public List<DataLayer> Get()

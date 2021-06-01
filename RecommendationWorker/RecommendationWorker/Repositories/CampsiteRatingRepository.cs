@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using RecommendationWorker.Models;
 using RecommendationWorker.Models.MLModels;
+using RecommendationWorker.MongoDB;
 using RecommendationWorker.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,9 @@ namespace RecommendationWorker.Repositories
     {
         private readonly IMongoCollection<CampsiteRatingData> _campsiteRatingData;
 
-        public CampsiteRatingRepository(IMongoDatabaseSettings settings)
+        public CampsiteRatingRepository(IMongoDBContext context)
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
-
-            _campsiteRatingData = database.GetCollection<CampsiteRatingData>(settings.UserRatingsCollection);
+            _campsiteRatingData = context.GetCampsiteRatingDataCollection();
         }
 
         public IEnumerable<CampsiteRatingData> GetAllCampsiteRatingData()

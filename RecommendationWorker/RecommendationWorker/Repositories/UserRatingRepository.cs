@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using RecommendationWorker.Models;
 using RecommendationWorker.Models.MLModels;
+using RecommendationWorker.MongoDB;
 using RecommendationWorker.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,17 +15,22 @@ namespace RecommendationWorker.Repositories
     {
         private readonly IMongoCollection<UserRating> _userRating;
 
-        public UserRatingRepository(IMongoDatabaseSettings settings)
+        public UserRatingRepository(IMongoDBContext context)
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
-
-            _userRating = database.GetCollection<UserRating>(settings.UserRatingsCollection);
+            _userRating = context.GetUserRatingCollection();
         }
 
         public List<UserRating> GetUserRatingsById(string id)
         {
-            return _userRating.Find(data => data.UserId.Equals(id)).ToList();
+            List<UserRating> userRatings = _userRating.Find(data => data.UserId.Equals(id)).ToList();
+            if (userRatings.Count > 0)
+            {
+                return userRatings;
+            }
+            else
+            {
+                throw new Exception($"No ratings found with userId: {id}");
+            }
         }
 
         public int InsertUserRatings(List<UserRating> userRatings)
