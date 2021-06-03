@@ -35,7 +35,7 @@ namespace RecommendationWorker.Serivces
 
         public DataLayer InsertDataLayer(DataLayer data)
         {
-            if (data != null)
+            if (data.Cookies.GA != "" || data.EntityKind != "")
             {
                 // Inserts the dataLayer into MongoDB
                 DataLayer returnData = _userDataRepository.InsertData(data);
