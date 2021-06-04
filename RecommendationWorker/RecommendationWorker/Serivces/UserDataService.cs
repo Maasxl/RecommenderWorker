@@ -41,17 +41,20 @@ namespace RecommendationWorker.Serivces
                 DataLayer returnData = _userDataRepository.InsertData(data);
 
                 // Filters the dataLayer to get campsiteIds and adds ratings based on entityKind
-                FilterDataLayer(data);
+                var ratingCount = FilterDataLayer(data);
 
-                // Train model with new data
-                _recommendationModelSerivce.TrainModel();
+                if (ratingCount > 0)
+                {
+                    // Train model with new data
+                    _recommendationModelSerivce.TrainModel();
+                }
                 return returnData;
             }
 
             throw new Exception("No data to be saved");
         }
 
-        public void FilterDataLayer(DataLayer data)
+        public int FilterDataLayer(DataLayer data)
         {
             List<UserRating> userRatings = new List<UserRating>();
             List<UserRating> existingRatings = _userRatingRepository.GetUserRatingsById(data.Cookies.GA);
@@ -98,11 +101,14 @@ namespace RecommendationWorker.Serivces
                     break;
             }
 
+            int ratingCount = 0;
+
             if (updateRatings.Count > 0)
             {
-                _userRatingRepository.UpdateUserRatings(updateRatings);
+                ratingCount += _userRatingRepository.UpdateUserRatings(updateRatings);
             }
-            _userRatingRepository.InsertUserRatings(userRatings);
+            ratingCount += _userRatingRepository.InsertUserRatings(userRatings);
+            return ratingCount;
         }
     }
 }

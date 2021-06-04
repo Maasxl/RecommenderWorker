@@ -23,14 +23,7 @@ namespace RecommendationWorker.Repositories
         public List<UserRating> GetUserRatingsById(string id)
         {
             List<UserRating> userRatings = _userRating.Find(data => data.UserId.Equals(id)).ToList();
-            if (userRatings.Count > 0)
-            {
-                return userRatings;
-            }
-            else
-            {
-                throw new Exception($"No ratings found with userId: {id}");
-            }
+            return userRatings;
         }
 
         public int InsertUserRatings(List<UserRating> userRatings)
@@ -42,7 +35,7 @@ namespace RecommendationWorker.Repositories
             return userRatings.Count;
         }
 
-        public void UpdateUserRatings(List<UserRating> userRatings)
+        public int UpdateUserRatings(List<UserRating> userRatings)
         {
             foreach(UserRating rating in userRatings)
             {
@@ -50,6 +43,7 @@ namespace RecommendationWorker.Repositories
                 var update = Builders<UserRating>.Update.Set("Rating", rating.Rating);
                 _userRating.UpdateOne(filter, update);
             }
+            return userRatings.Count;
         }
     }
 }
