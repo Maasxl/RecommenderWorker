@@ -22,8 +22,7 @@ namespace RecommendationWorker.Repositories
 
         public List<UserRating> GetUserRatingsById(string id)
         {
-            List<UserRating> userRatings = _userRating.Find(data => data.UserId.Equals(id)).ToList();
-            return userRatings;
+            return _userRating.Find(data => data.UserId.Equals(id)).ToList();
         }
 
         public int InsertUserRatings(List<UserRating> userRatings)

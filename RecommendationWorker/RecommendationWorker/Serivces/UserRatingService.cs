@@ -19,7 +19,15 @@ namespace RecommendationWorker.Serivces
 
         public List<UserRating> GetUserRatingById(string id)
         {
-            return _userRatingRepository.GetUserRatingsById(id);
+            List<UserRating> userRatings = _userRatingRepository.GetUserRatingsById(id);
+            if (userRatings.Count > 0)
+            {
+                return userRatings;
+            }
+            else
+            {
+                throw new Exception($"No user ratings found for user: {id}");
+            }
         }
     }
 }
