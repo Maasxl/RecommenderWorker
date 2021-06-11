@@ -24,7 +24,7 @@ namespace RecommendationWorker.Serivces
         {
             MLContext mlContext = new MLContext();
 
-            ITransformer trainedModel = mlContext.Model.Load("Data/CampsiteRecommenderModel.zip", out DataViewSchema modelSchema);
+            ITransformer trainedModel = mlContext.Model.Load("CampsiteRecommenderModel.zip", out DataViewSchema modelSchema);
 
             Console.WriteLine("=============== Making a prediction ===============");
             var predictionEngine = mlContext.Model.CreatePredictionEngine<CampsiteRatingData, CampsiteRatingPrediction>(trainedModel);
@@ -91,7 +91,7 @@ namespace RecommendationWorker.Serivces
             Console.WriteLine("RSquared: " + metrics.RSquared.ToString());
 
             // Save the model
-            var modelPath = Path.Combine(System.Environment.CurrentDirectory, "Data", "CampsiteRecommenderModel.zip");
+            var modelPath = Path.Combine(System.Environment.CurrentDirectory, "CampsiteRecommenderModel.zip");
 
             Console.WriteLine("=============== Saving the model to a file ===============");
             mlContext.Model.Save(model, trainData.Schema, modelPath);
